@@ -1,10 +1,15 @@
+<?php
+    include('app/config.php');
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sicoob Empresas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -18,6 +23,42 @@
     </script>
 </head>
 <body>
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['senha'];
+
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && $password === $user['senha']) {
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['nome'] = $user['nome'];
+            $_SESSION['email'] = $user['email'];
+            header('Location: dashboard.php');
+            // Adicione aqui a lógica para redirecionar o usuário ou realizar outras ações após o login.
+        } else {
+            echo "<script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Usuário ou senha inválidos.',
+                showConfirmButton: false,
+                timer: 1500
+              });
+            </script>";
+        }
+    } catch (PDOException $e) {
+        die("Erro na consulta SQL: ");
+    }
+}
+?>
+
         <section class="min-h-screen flex items-stretch text-white ">
             <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center" style="background-image: url(images/sipag.jpg);">
                 <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
@@ -30,18 +71,18 @@
                     <h1 class="my-6">
                         <img src="images/empresas.png" alt="" class="w-auto h-30 sm:h-40 inline-flex">
                     </h1>
-                    <form action="" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    <form method="POST" action="" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
                         <div class="pb-2 pt-4">
                             <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black">
                         </div>
                         <div class="pb-2 pt-4">
-                            <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Senha">
+                            <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="senha" id="password" placeholder="Senha">
                         </div>
                         <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
                             <a href="#">Esqueceu a senha?</a>
                         </div>
                         <div class="px-4 pb-2 pt-4">
-                            <button class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">sign in</button>
+                            <input type="submit" name="validLogin" class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none" style="cursor: pointer;"></input>
                         </div>
                     </form>
                 </div>

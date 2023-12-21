@@ -1,5 +1,10 @@
+<?php
+    include('app/config.php');
+    include('app/protection.php');
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +15,15 @@
 </head>
 
 <body>
-
+<?php
+    if(isset($_POST['logout'])){
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: ../../index.php");
+        exit();
+    }
+?>
     <div class="container">
         <!-- Sidebar Section -->
         <aside>
@@ -52,11 +65,10 @@
                     <h3>Analíticas</h3>
                 </a>
                 <a href="#">
-                    <span class="material-icons-sharp">
-                        mail_outline
-                    </span>
-                    <h3>Tickets</h3>
-                    <span class="message-count">2</span>
+                <span class="material-icons-sharp">
+                    attach_money
+                </span>
+                    <h3>Faturamento</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">
@@ -82,12 +94,16 @@
                     </span>
                     <h3>Novo Login</h3>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    <h3>Logout</h3>
-                </a>
+                <form method="POST" action="">
+                    <a href="#">
+                        <button name="logout" style="border: 0px; margin: 0px; padding: 0px; color: #363949;background: none;display: flex;align-items: center;cursor: pointer;gap: 15px;">
+                            <span class="material-icons-sharp">
+                                logout
+                            </span>
+                            <h3>Logout</h3>
+                        </button>
+                    </a>
+                </form>
             </div>
         </aside>
         <!-- End of Sidebar Section -->
@@ -155,7 +171,7 @@
                 <div class="user-list">
                     <div class="user">
                         <img src="images/profile-2.jpg">
-                        <h2>Bruno</h2>
+                        <h2>Alan</h2>
                         <p>54 Horas atrás</p>
                     </div>
                     <div class="user">
@@ -165,7 +181,7 @@
                     </div>
                     <div class="user">
                         <img src="images/profile-4.jpg">
-                        <h2>Wellington</h2>
+                        <h2>Thiago</h2>
                         <p>6 Horas atrás</p>
                     </div>
                     <div class="user new-user">
@@ -218,7 +234,22 @@
 
                 <div class="profile">
                     <div class="info">
-                        <p>Olá, <b>Usuário</b></p>
+                        <p>Olá, <b><?php echo alterarNome($_SESSION['nome']);?></b></p>
+                        <?php
+                            function alterarNome($nomeCompleto){
+                                    // Divide o nome completo em partes
+                                    $partesNome = explode(' ', $nomeCompleto);
+
+                                    // Obtém o primeiro nome
+                                    $primeiroNome = $partesNome[0];
+
+                                    // Obtém o último nome (último elemento do array)
+                                    $ultimoNome = end($partesNome);
+
+                                    // Retorna a combinação do primeiro e último nome
+                                    return $primeiroNome . ' ' . $ultimoNome;
+                            }
+                        ?>
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">

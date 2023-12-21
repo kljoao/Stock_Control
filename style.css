@@ -58,6 +58,10 @@ body{
     background-color: var(--color-background);
 }
 
+.swal2-popup {
+    font-family: 'Poppins', sans-serif;
+  }
+
 a{
     color: var(--color-dark);
 }
