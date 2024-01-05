@@ -1,92 +1,339 @@
 <?php
     include('app/config.php');
+    include('app/protection.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
     <title>Sicoob Empresas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src=""></script>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              clifford: '#da373d',
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+        },
+        options: {
+        scales: {
+            y: {
+            beginAtZero: true
             }
-          }
         }
-      }
+        }
+    });
     </script>
 </head>
-<body>
+
+<body class="dark-mode-variables">
 <?php
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['senha'];
-
-    try {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && $password === $user['senha']) {
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['nome'] = $user['nome'];
-            $_SESSION['email'] = $user['email'];
-            header('Location: dashboard.php');
-            // Adicione aqui a lógica para redirecionar o usuário ou realizar outras ações após o login.
-        } else {
-            echo "<script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'Usuário ou senha inválidos.',
-                showConfirmButton: false,
-                timer: 1500
-              });
-            </script>";
-        }
-    } catch (PDOException $e) {
-        die("Erro na consulta SQL: ");
+    if(isset($_POST['logout'])){
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: ../../index.php");
+        exit();
     }
-}
 ?>
+    <div class="container">
+        <!-- Sidebar Section -->
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <img src="images/logo.webp">
+                    <h2>Sicoob<span class="sicoob"> Empresas</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
 
-        <section class="min-h-screen flex items-stretch text-white ">
-            <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center" style="background-image: url(images/sipag.jpg);">
-                <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">
+                        dashboard
+                    </span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        insights
+                    </span>
+                    <h3>Analíticas</h3>
+                </a>
+                <a href="#">
+                <span class="material-icons-sharp">
+                    attach_money
+                </span>
+                    <h3>Faturamento</h3>
+                </a>
+                <a href="assets/pages/contratos.php">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>Contratos</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        report_gmailerrorred
+                    </span>
+                    <h3>Localizar</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        settings
+                    </span>
+                    <h3>Configuração</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        add
+                    </span>
+                    <h3>Novo Login</h3>
+                </a>
+                <form method="POST" action="">
+                    <a href="#">
+                        <button name="logout" style="border: 0px; margin: 0px; padding: 0px; color: #363949;background: none;display: flex;align-items: center;cursor: pointer;gap: 15px;">
+                            <span class="material-icons-sharp">
+                                logout
+                            </span>
+                            <h3>Logout</h3>
+                        </button>
+                    </a>
+                </form>
             </div>
-            <div class="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0" style="background-color: #161616;">
-                <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
-                    <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+        </aside>
+        <!-- End of Sidebar Section -->
+
+
+        <!-- Main Content -->
+        <main>
+            <h1>Dashboard</h1>
+            <!-- Analyses -->
+            <div class="analyse">
+                <div class="sales">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Vendidos</h3>
+                            <h1>$65,024</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+81%</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-full py-6 z-20">
-                    <h1 class="my-6">
-                        <img src="images/empresas.png" alt="" class="w-auto h-30 sm:h-40 inline-flex">
-                    </h1>
-                    <form method="POST" action="" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
-                        <div class="pb-2 pt-4">
-                            <input type="email" name="email" id="email" placeholder="Email" class="block w-full p-4 text-lg rounded-sm bg-black">
+                <div class="visits">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Maquinas</h3>
+                            <h1>24,981</h1>
                         </div>
-                        <div class="pb-2 pt-4">
-                            <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="senha" id="password" placeholder="Senha">
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>-48%</p>
+                            </div>
                         </div>
-                        <div class="text-right text-gray-400 hover:underline hover:text-gray-100">
-                            <a href="#">Esqueceu a senha?</a>
+                    </div>
+                </div>
+                <div class="searches">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Saídas</h3>
+                            <h1>3850</h1>
                         </div>
-                        <div class="px-4 pb-2 pt-4">
-                            <input type="submit" name="validLogin" class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none" style="cursor: pointer;"></input>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+21%</p>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </section>
-    </body>
+            <!-- End of Analyses -->
+
+            <!-- New Users Section -->
+            <div class="new-users">
+                <h2>Novos Usuários</h2>
+                <div class="user-list">
+                    <div class="user">
+                        <img src="images/profile-2.jpg">
+                        <h2>Alan</h2>
+                        <p>54 Horas atrás</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/profile-3.jpg">
+                        <h2>João</h2>
+                        <p>3 Horas atrás</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/profile-4.jpg">
+                        <h2>Thiago</h2>
+                        <p>6 Horas atrás</p>
+                    </div>
+                    <div class="user new-user">
+                        <img src="images/plus.png">
+                        <h2>Mais</h2>
+                        <p>Novo Usuário</p>
+                    </div>
+                </div>
+            </div>
+            <!-- End of New Users Section -->
+
+            <!-- Recent Orders Table -->
+            <div class="recent-orders">
+                <h2>Últimas Saídas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Máquina</th>
+                            <th>Número de série</th>
+                            <th>Chip</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <a href="#">Mostrar Mais</a>
+            </div>
+            <!-- End of Recent Orders -->
+
+        </main>
+        <!-- End of Main Content -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp active">
+                        dark_mode
+                    </span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b><?php echo alterarNome($_SESSION['nome']);?></b></p>
+                        <?php
+                            function alterarNome($nomeCompleto){
+                                    // Divide o nome completo em partes
+                                    $partesNome = explode(' ', $nomeCompleto);
+
+                                    // Obtém o primeiro nome
+                                    $primeiroNome = $partesNome[0];
+
+                                    // Obtém o último nome (último elemento do array)
+                                    $ultimoNome = end($partesNome);
+
+                                    // Retorna a combinação do primeiro e último nome
+                                    return $primeiroNome . ' ' . $ultimoNome;
+                            }
+                        ?>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="images/profile-1.jpg">
+                    </div>
+                </div>
+
+            </div>
+            <!-- End of Nav -->
+
+
+            <div class="reminders">
+                <div class="header">
+                    <h2>Lembretes</h2>
+                    <span class="material-icons-sharp">
+                        notifications_none
+                    </span>
+                </div>
+
+                <div class="notification">
+                    <div class="icon">
+                        <span class="material-icons-sharp">
+                            volume_up
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Cadastrar Chip - Varista</h3>
+                            <small class="text_muted">
+                                08:00 - 12:00 
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+
+                <div class="notification deactive">
+                    <div class="icon">
+                        <span class="material-icons-sharp">
+                            edit
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Verificar Saídas</h3>
+                            <small class="text_muted">
+                                15:00  - 18:00 
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+
+                <div class="notification add-reminder">
+                    <div>
+                        <span class="material-icons-sharp">
+                            add
+                        </span>
+                        <h3>Novo Alerta</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="orders.js"></script>
+    <script src="index.js"></script>
+</body>
+
 </html>
