@@ -70,7 +70,7 @@
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="#">
+                <a href="assets/pages/analíticas.php">
                     <span class="material-icons-sharp">
                         insights
                     </span>

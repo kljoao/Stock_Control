@@ -36,6 +36,12 @@
         }
     });
     </script>
+
+    <style>
+        #cabal, #master{
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body class="dark-mode-variables">
@@ -70,7 +76,7 @@
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="#">
+                <a href="analíticas.php">
                     <span class="material-icons-sharp">
                         insights
                     </span>
@@ -119,6 +125,44 @@
             </div>
         </aside>
         <!-- End of Sidebar Section -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp active">
+                        dark_mode
+                    </span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b><?php echo alterarNome($_SESSION['nome']);?></b></p>
+                        <?php
+                            function alterarNome($nomeCompleto){
+                                    $partesNome = explode(' ', $nomeCompleto);
+                                    $primeiroNome = $partesNome[0];
+                                    $ultimoNome = end($partesNome);
+                                    return $primeiroNome . ' ' . $ultimoNome;
+                            }
+                        ?>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="../../images/profile-1.jpg">
+                    </div>
+                </div>
+
+            </div>
+            <!-- End of Nav -->
 
         <main>
             <div class="new-users">
@@ -200,77 +244,108 @@
                         <div>
                             <h3>Bandeiras para concessão</h3>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="cabal-checkbox">
                                     <p>Cabal</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="master-checkbox">
                                     <p>Master</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="master-visa">
                                     <p>Visa</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="master-elo">
                                     <p>Elo</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="master-hipercard">
                                     <p>Hipercard</p>
                                 </div>
                         </div>
                     </form>
                 </div>
+
+                <div id="cabal" class="user-list">
+                    <h2>CONDIÇÕES PARA CONCESSÃO DE INCENTIVOS - CABAL</h2>
+                    <br>
+                    <br>
+                    <form action="" method="POST" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                        <div>
+                            <table style="width: 1000px;">
+                                <tr>
+                                    <td style="font-size: 24px;">Modalidade</td>
+                                    <td style="font-size: 18px;">Taxas com alcance da meta</td>
+                                    <td style="font-size: 18px;">Taxas sem alcance da meta</td>
+                                </tr>
+                                <tr>
+                                    <td>Débito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 2x a 6x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 7x a 12x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="master" class="user-list">
+                    <h2>CONDIÇÕES PARA CONCESSÃO DE INCENTIVOS - MASTER</h2>
+                    <br>
+                    <br>
+                    <form action="" method="POST" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                        <div>
+                            <table style="width: 1000px;">
+                                <tr>
+                                    <td style="font-size: 24px;">Modalidade</td>
+                                    <td style="font-size: 18px;">Taxas com alcance da meta</td>
+                                    <td style="font-size: 18px;">Taxas sem alcance da meta</td>
+                                </tr>
+                                <tr>
+                                    <td>Débito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 2x a 6x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 7x a 12x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
             </div>
         </main>
-
-        <!-- Right Section -->
-        <div class="right-section">
-            <div class="nav">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp">
-                        menu
-                    </span>
-                </button>
-                <div class="dark-mode">
-                    <span class="material-icons-sharp">
-                        light_mode
-                    </span>
-                    <span class="material-icons-sharp active">
-                        dark_mode
-                    </span>
-                </div>
-
-                <div class="profile">
-                    <div class="info">
-                        <p>Olá, <b><?php echo alterarNome($_SESSION['nome']);?></b></p>
-                        <?php
-                            function alterarNome($nomeCompleto){
-                                    // Divide o nome completo em partes
-                                    $partesNome = explode(' ', $nomeCompleto);
-
-                                    // Obtém o primeiro nome
-                                    $primeiroNome = $partesNome[0];
-
-                                    // Obtém o último nome (último elemento do array)
-                                    $ultimoNome = end($partesNome);
-
-                                    // Retorna a combinação do primeiro e último nome
-                                    return $primeiroNome . ' ' . $ultimoNome;
-                            }
-                        ?>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="../../images/profile-1.jpg">
-                    </div>
-                </div>
-
-            </div>
-            <!-- End of Nav -->
             
-
+    <script src="../script/flags.js"></script>
     <script src="../../index.js"></script>
 </body>
 
