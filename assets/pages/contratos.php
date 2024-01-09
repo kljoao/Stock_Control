@@ -38,7 +38,7 @@
     </script>
 
     <style>
-        #cabal, #master{
+        #cabal, #master, #visa, #elo, #hipercard{
             display: none !important;
         }
     </style>
@@ -252,15 +252,15 @@
                                     <p>Master</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox" id="master-visa">
+                                    <input type="checkbox" id="visa-checkbox">
                                     <p>Visa</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox" id="master-elo">
+                                    <input type="checkbox" id="elo-checkbox">
                                     <p>Elo</p>
                                 </div>
                                 <div style="display: flex; gap: 5px;">
-                                    <input type="checkbox" id="master-hipercard">
+                                    <input type="checkbox" id="hipercard-checkbox">
                                     <p>Hipercard</p>
                                 </div>
                         </div>
@@ -340,9 +340,120 @@
                         </div>
                     </form>
                 </div>
+
+                <div id="visa" class="user-list">
+                    <h2>CONDIÇÕES PARA CONCESSÃO DE INCENTIVOS - VISA</h2>
+                    <br>
+                    <br>
+                    <form action="" method="POST" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                        <div>
+                            <table style="width: 1000px;">
+                                <tr>
+                                    <td style="font-size: 24px;">Modalidade</td>
+                                    <td style="font-size: 18px;">Taxas com alcance da meta</td>
+                                    <td style="font-size: 18px;">Taxas sem alcance da meta</td>
+                                </tr>
+                                <tr>
+                                    <td>Débito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 2x a 6x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 7x a 12x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            
+                <div id="elo" class="user-list">
+                    <h2>CONDIÇÕES PARA CONCESSÃO DE INCENTIVOS - ELO</h2>
+                    <br>
+                    <br>
+                    <form action="" method="POST" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                        <div>
+                            <table style="width: 1000px;">
+                                <tr>
+                                    <td style="font-size: 24px;">Modalidade</td>
+                                    <td style="font-size: 18px;">Taxas com alcance da meta</td>
+                                    <td style="font-size: 18px;">Taxas sem alcance da meta</td>
+                                </tr>
+                                <tr>
+                                    <td>Débito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 2x a 6x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 7x a 12x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="hipercard" class="user-list">
+                    <h2>CONDIÇÕES PARA CONCESSÃO DE INCENTIVOS - HIPERCARD</h2>
+                    <br>
+                    <br>
+                    <form action="" method="POST" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                        <div>
+                            <table style="width: 1000px;">
+                                <tr>
+                                    <td style="font-size: 24px;">Modalidade</td>
+                                    <td style="font-size: 18px;">Taxas com alcance da meta</td>
+                                    <td style="font-size: 18px;">Taxas sem alcance da meta</td>
+                                </tr>
+                                <tr>
+                                    <td>Débito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito a vista</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 2x a 6x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Crédito parcelado sem juros 7x a 12x</td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
             </div>
             
-            </div>
         </main>
             
     <script src="../script/flags.js"></script>
