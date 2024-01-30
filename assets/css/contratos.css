@@ -432,6 +432,21 @@ main .recent-orders a{
     overflow: hidden;
 }
 
+.add-cnpj{
+    border: 0px;
+    color: red;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.criar-contrato{
+    margin-top: 20px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: greenyellow;
+}
+
 .right-section .user-profile{
     display: flex;
     justify-content: center;

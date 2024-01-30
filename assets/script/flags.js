@@ -52,3 +52,60 @@ hipercardCheckbox.addEventListener('change', () => {
         hipercard.setAttribute('style', 'display: none !important;');
     }
 });
+
+const quantidade = document.querySelector('#quantity')
+
+function criarCampos(){
+    document.getElementById('campos-cnpjs').innerHTML = '';
+
+    // Obtém a quantidade de CNPJs do usuário
+    var quantidadeCnpjs = document.getElementById('quantidade-cnpjs').value;
+
+    // Cria novos campos de input com base na quantidade fornecida
+    for (var i = 0; i < quantidadeCnpjs; i++) {
+      var novoInput = document.createElement('quantidade');
+      novoInput.type = 'text';
+      novoInput.className = 'cnpj-input';
+      novoInput.placeholder = 'Digite o CNPJ ' + (i + 1);
+
+      // Adiciona o novo input à div
+      document.getElementById('campos-cnpjs').appendChild(novoInput);
+    }
+}
+
+
+const addCnpjButton = document.querySelector('.add-cnpj');
+const cnpjsContainer = document.getElementById('cnpjsContainer');
+
+function adicionarCnpj() {
+    const novoInput = document.createElement('input');
+    novoInput.type = 'text';
+    novoInput.placeholder = 'CNPJ Adicional';
+    novoInput.className = 'cnpj-adicional';
+    novoInput.style.width = '150px';
+    novoInput.style.padding = '10px';
+    novoInput.style.borderRadius = '5px';
+    novoInput.style.border = 'solid 1px black';
+
+    cnpjsContainer.appendChild(novoInput);
+}
+
+addCnpjButton.addEventListener('click', adicionarCnpj);
+
+function formatarMoeda(){
+    const faturamentoMensal = document.querySelector('#faturamentoMensal');
+    valor = faturamentoMensal.value
+
+    valor = valor + ''
+    valor = valor + '';
+    valor = parseInt(valor.replace(/[\D]+/g, ''));
+    valor = valor + '';
+    valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+    if (valor.length > 6) {
+        valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+    }
+
+    elemento.value = valor;
+    if(valor == 'NaN') elemento.value = '';
+}

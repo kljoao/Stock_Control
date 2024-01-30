@@ -207,7 +207,7 @@
 
                         <div>
                             <h3>Faturamento Mensal (R$)</h3>
-                                <input type="text" placeholder="R$ 8.888.88,00" style="width: 150px; padding: 10px; border-radius: 5px; border: solid 1px black;">
+                                <input type="text" oninput="formatarMoeda()" placeholder="R$ 8.888.88,00" style="width: 150px; padding: 10px; border-radius: 5px; border: solid 1px black;">
                         </div>
 
                         <div style="margin-top: -17px;">
@@ -281,13 +281,13 @@
                                 </tr>
                                 <tr>
                                     <td>Débito a vista</td>
-                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
-                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;" id="cabal-taxa-debito"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;" id="cabal-sem-taxa-debito"></td>
                                 </tr>
                                 <tr>
                                     <td>Crédito a vista</td>
-                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
-                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;" id="cabal-taxa-credito"></td>
+                                    <td><input type="text" style="width: 169px; padding: 5px; border-radius: 5px; border: solid 1px black;" id="cabal-sem-taxa-credito"></td>
                                 </tr>
                                 <tr>
                                     <td>Crédito parcelado sem juros 2x a 6x</td>
@@ -452,8 +452,19 @@
                     </form>
                 </div>
 
+                <div class="user-list">
+                    <h2>Lista de CNPJs Adicionais</h2>
+                    <form action="" method="POST" style="display: flex; align-items: center; gap: 10px;">
+                        <div class="cnpjs-adicionais" id="cnpjsContainer">
+                            <input type="text" class="cnpj-adicional" placeholder="CNPJ Adicional" style="width: 150px; padding: 10px; border-radius: 5px; border: solid 1px black;">
+                        </div>
+                        <button type="button" class="add-cnpj">+</button>
+                    </form>
+                </div>
+
+
             </div>
-            
+            <button class="criar-contrato">Criar Contrato</button>
         </main>
             
     <script src="../script/flags.js"></script>
